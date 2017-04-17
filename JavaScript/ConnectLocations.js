@@ -10,7 +10,6 @@ $.ajax({
       "$$app_token" : "0JZQkOpCfiZ221meZTVm0tMag"
     }
 }).done(function(data) {
-  alert("Showing " + data.length + " connect locations!");
     for (var i = 0; i <= data.length; i++) {
       if(data[i]){
         createMarkerConnect(data[i]);
@@ -76,7 +75,9 @@ function createMarkerConnect(data){
   createInfoConnect(marker, data);
 }
 
-
+ function alertConnect(){
+  alert( "Showing " + connectMarker.length + " connect locations! \nCThe connect locations are places where internet and computer access, digital skills training, and online learning resources are available for free"  );
+ }
 
 
 

@@ -10,7 +10,6 @@ $.ajax({
       "$$app_token" : "0JZQkOpCfiZ221meZTVm0tMag"
     }
 }).done(function(data) {
-  alert("Showing " + data.length + " stations!");
     for (var i = 0; i <= data.length; i++) {
       if(data[i]){
         createMarkerPolice(data[i]);
@@ -76,6 +75,8 @@ function createMarkerPolice(data){
 }
 
 
-
+ function alertPolice(){
+  alert( "Showing " + policeMarker.length + " police stations! \nA building which serves to accommodate police officers and other members of staff");
+ }
 
 

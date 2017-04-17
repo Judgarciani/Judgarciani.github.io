@@ -10,7 +10,6 @@ $.ajax({
       "$$app_token" : "0JZQkOpCfiZ221meZTVm0tMag"
     }
 }).done(function(data) {
-  alert("Showing " + data.length + " libraries!");
     for (var i = 0; i <= data.length; i++) {
       if(data[i]){
         createMarkerLibraries(data[i]);
@@ -79,3 +78,6 @@ function createMarkerLibraries(data){
 }
 
 
+ function alertLibrary(){
+  alert( "Showing " + libraryMarker.length + " libraries! \nAll of this are public libraries" );
+ }

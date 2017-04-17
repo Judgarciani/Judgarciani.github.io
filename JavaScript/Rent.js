@@ -19,7 +19,6 @@
  			"$$app_token" : "0JZQkOpCfiZ221meZTVm0tMag"
  		}
  	}).done(function(data) {
- 		alert("Showing " + data.length + " rent places!");
 
  		for (var i = 0; i <= data.length; i++) {
  			if (data[i]){
@@ -241,4 +240,8 @@
 
  	}
 
+ }
+
+ function alertRent(){
+	alert( "Showing " + rentMarker.length + " rent places! \nClicking on a rent marker will show all markers within a 500 meter radius"  );
  }

@@ -10,7 +10,6 @@ $.ajax({
       "$$app_token" : "0JZQkOpCfiZ221meZTVm0tMag"
     }
 }).done(function(data) {
-  alert("Showing " + data.length + " crimes!");
     for (var i = 0; i <= data.length; i++) {
       if(data[i]){
         createMarkerCrimes(data[i]);
@@ -76,6 +75,12 @@ function createMarkerCrimes(data){
       });
       createInfoCrime(marker, data);
 }
+
+
+ function alertCrime(){
+  alert( "Showing " + crimeMarker.length + " crimes! \nAll this crimes happened in the 2015"  );
+ }
+
 
 
 
