@@ -5,6 +5,7 @@
   <head>
   <title>Best rent place in Chicago </title>
   <meta charset = "utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta  name = "author" content = "Juan David Garcia Niño"> 
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type="text/css">
@@ -24,33 +25,51 @@
   <script src="JavaScript/Libraries.js"></script>
   <link rel="stylesheet" type="text/css" href="Css/Styles.css" media="screen" />
   </head>
- 
-   <body>
-<div class="page-header text-center">
-     <h1>Best rent place in Chicago</h1>
-</div>
-<div> <p>Clicking on a rent marker will show the nearest (500 meteres) crimes, libraries, connect locations and police stations <br> The connect locations are places where internet and computer access, digital skills training, and online learning resources are available for free. </p></div>
 
-  <div class="container-fluid">
-      <div class="row content">
-        <div class="col-sm-2 sidenav">
-          <ul class="nav nav-pills nav-stacked">
-            <li id = "weather"></li>
+ 
+
+   <body>
+<br><br><br><br>
+<header id="main-header">
+    <a id="logo-header" href="#">
+      <span class="site-name">Chicago housing</span>
+      <span class="site-desc">Best rent place in Chicago</span>
+    </a> 
+ 
+    <nav>
+      <ul>
             <li><a href="#" onclick="toogleRentMarkers()"> Toogle all rent places</a></li>
             <li><a href="#" onclick="toogleCrimeMarkers()">Toogle all crimes</a></li>
             <li><a href="#" onclick="tooglePoliceMarkers()">Toogle all police stations</a></li>
             <li><a href="#" onclick="toogleLibraryMarkers()">Toogle all library locations</a></li> 
             <li><a href="#" onclick="toogleConnectMarkers()">Toogle all connect locations</a></li> 
             <li><a href="#" onclick="toggleHeatmap(map)"> Toogle Security Heat map</a></li>
+      </ul>
+    </nav>
+ 
+  </header>
+  <div class="container-fluid">
+      <div class="row content">
+        <div class="col-sm-2 sidenav">
+          <ul class="nav nav-pills nav-stacked">
+            <li id = "weather"></li>
+            <br>
+            <li><b>Conventions</b> (click for more information)</li>
+            <li><a href="#" onclick="clickConvention(3)">University <IMG SRC="Images/universityIcon.png"></a></li>
+            <li><a href="#" onclick="clickConvention(1)">Rent place <IMG SRC="Images/rentIcon.png"></a> </li>
+            <li><a href="#" onclick="clickConvention(6)">Crimes <IMG SRC="Images/crimeIcon.png"></a></li>
+            <li><a href="#" onclick="clickConvention(5)">Police station <IMG SRC="Images/policeIcon.png"></a></li>
+            <li><a href="#" onclick="clickConvention(4)">Library <IMG SRC="Images/libraryIcon.png"></a></li>
+            <li><a href="#" onclick="clickConvention(2)">Connect location <IMG SRC="Images/connectIcon.png"></a> </li>
           </ul>
         </div>
        <div class = "col-sm-10  mapa" id="map">
        </div>
      </div>
   </div>
-  <br><br>
+  <br>
     <div class="container-fluid">
-		<div class = "row content ">
+		<div class = "row content1 ">
 			<div class = "col-sm-4">
         <h4>Last marker clicked</h4>
 				<ul style="list-style-type:none">
@@ -119,7 +138,6 @@
 	      icon: "Images/universityIcon.png"
 	   	});
       initialConfig();
-      console.log(markers.length);
 
     }
 
@@ -134,6 +152,23 @@ function initialConfig() {
      getStations(map);
      getConnect(map);
      getLibraries(map);
+
+}
+
+function clickConvention(type){
+if (type == 1)
+  alert("Clicking on a rent marker will show all markers within a 500 meter radius");
+else if (type == 2)
+  alert("The connect locations are places where internet and computer access, digital skills training, and online learning resources are available for free");
+else if (type == 3)
+  map.setCenter({lat: 41.8708, lng: -87.6505});
+else if (type == 4)
+  alert("All of this are public libraries");
+else if (type == 5)
+ alert("A building which serves to accommodate police officers and other members of staff"); 
+else if (type == 6)
+ alert("All this crimes happened in the 2015"); 
+
 
 
 }

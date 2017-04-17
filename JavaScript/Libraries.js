@@ -73,7 +73,7 @@ function createMarkerLibraries(data){
       position: new google.maps.LatLng(data.location.coordinates[1],data.location.coordinates[0]),
       map: map,
       title: data.primary_type ,
-      icon : 'Images/librarieIcon.png'
+      icon : 'Images/libraryIcon.png'
       });
       createInfoLibrary(libmarker, data);
 }

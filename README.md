@@ -50,4 +50,7 @@ Interaction Form:
 Test Case Which browsers did you test your project on?
 Tested in Chrome, Edge and Firefox
 
-Link : 
+I use the open weather API (i know it isnt what we must use), but i dont know why in the GitHub page it doesnt work 
+
+Link : https://judgarciani.github.io/
+
