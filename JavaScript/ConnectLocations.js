@@ -76,7 +76,7 @@ function createMarkerConnect(data){
 }
 
  function alertConnect(){
-  alert( "Showing " + connectMarker.length + " connect locations! \nThe connect locations are places where internet and computer access, digital skills training, and online learning resources are available for free"  );
+  alert( "Showing " + connectMarker.length + " connect locations! \nConnect Chicago is a loose network of more than 250 places in the city where internet and computer access, digital skills training, and online learning resources are available for free."  );
  }
 
 
