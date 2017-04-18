@@ -115,12 +115,13 @@
  	document.getElementById("6").innerHTML = "<b>Zip code:</b> " + data.zip_code ;
  	document.getElementById("7").innerHTML = "<b>Phone number:</b> " + data.phone_number ;
  	document.getElementById("8").innerHTML = "<b>Management company:</b> " + data.management_company ;
- 	document.getElementById("9").innerHTML = "<b>Distance to the University:</b> " + distance + " meters";
- 	document.getElementById("10").innerHTML = "<b>Crimes that happened nearby (last year):</b> " + crimesNearby ;
- 	document.getElementById("11").innerHTML = "<b>Police station nearby:</b> " + policeStationsNearby ;
- 	document.getElementById("12").innerHTML = "<b>Connect locations nearby:</b> " + connectNearby;
- 	document.getElementById("13").innerHTML = "<b>Libraries nearby:</b> " + libraryNearby;
- 	document.getElementById("14").innerHTML = "" ;
+ 	document.getElementById("9").innerHTML = "<b><em>Estimated price:</em></b>" + communityprice[data.community_area_number] + '&#36';
+ 	document.getElementById("10").innerHTML = "<b>Distance to the University:</b> " + distance + " meters";
+ 	document.getElementById("11").innerHTML = "<b>Crimes that happened nearby (last year):</b> " + crimesNearby ;
+ 	document.getElementById("12").innerHTML = "<b>Police station nearby:</b> " + policeStationsNearby ;
+ 	document.getElementById("13").innerHTML = "<b>Connect locations nearby:</b> " + connectNearby;
+ 	document.getElementById("14").innerHTML = "<b>Libraries nearby:</b> " + libraryNearby;
+ 	
 
 
 
@@ -147,10 +148,11 @@
  	document.getElementById("mem7").innerHTML = "<b>Phone number:</b> " + lastMarkerVisited.phone_number ;
  	document.getElementById("mem8").innerHTML = "<b>Management company:</b> "+ lastMarkerVisited.management_company ;
  	document.getElementById("mem9").innerHTML = "<b>Distance to the University:</b> " + Rentdistance + " meters";
- 	document.getElementById("mem10").innerHTML = "<b>Crimes that happened nearby (last year):</b> " + lastMarkerVisited.crimesNearby ;
- 	document.getElementById("mem11").innerHTML = "<b>Police station nearby:</b> " + lastMarkerVisited.policeStationsNearby ;
- 	document.getElementById("mem12").innerHTML = "<b>Connect locations nearby:</b> " + lastMarkerVisited.connectNearby;
- 	document.getElementById("mem13").innerHTML = "<b>Libraries nearby:</b> " + lastMarkerVisited.libraryNearby;
+ 	document.getElementById("mem10").innerHTML = "<b><em>Estimated price:</em></b>" + communityprice[lastMarkerVisited.community_area_number]+'&#36';
+ 	document.getElementById("mem11").innerHTML = "<b>Crimes that happened nearby (last year):</b> " + lastMarkerVisited.crimesNearby ;
+ 	document.getElementById("mem12").innerHTML = "<b>Police station nearby:</b> " + lastMarkerVisited.policeStationsNearby ;
+ 	document.getElementById("mem13").innerHTML = "<b>Connect locations nearby:</b> " + lastMarkerVisited.connectNearby;
+ 	document.getElementById("mem14").innerHTML = "<b>Libraries nearby:</b> " + lastMarkerVisited.libraryNearby;
 
  }
 
@@ -171,11 +173,13 @@
  	document.getElementById("mem6").innerHTML = "<b>Zip code:</b> " + info.marker.zip_code ;
  	document.getElementById("mem7").innerHTML = "<b>Phone number:</b> " + info.marker.phone_number ;
  	document.getElementById("mem8").innerHTML = "<b>Management company:</b> " + info.marker.management_company ;
- 	document.getElementById("mem9").innerHTML = "<b>Crimes that happened nearby (last year):</b> " + info.marker.crimesNearby ;
- 	document.getElementById("mem10").innerHTML = "<b>Police station nearby:</b> " + info.marker.policeStationsNearby ;
- 	document.getElementById("mem11").innerHTML = "<b>Connect locations nearby:</b> " + info.marker.connectNearby;
- 	document.getElementById("mem12").innerHTML = "<b>Libraries nearby:</b>" + info.marker.libraryNearby ;
- 	document.getElementById("mem13").innerHTML = " " ;
+ 	document.getElementById("mem9").innerHTML = "<b><em>Estimated price:</em></b>" + communityprice[info.marker.community_area_number]+'&#36';
+ 	document.getElementById("mem10").innerHTML = "<b>Crimes that happened nearby (last year):</b> " + info.marker.crimesNearby ;
+ 	document.getElementById("mem11").innerHTML = "<b>Police station nearby:</b> " + info.marker.policeStationsNearby ;
+ 	document.getElementById("mem12").innerHTML = "<b>Connect locations nearby:</b> " + info.marker.connectNearby;
+ 	document.getElementById("mem13").innerHTML = "<b>Libraries nearby:</b>" + info.marker.libraryNearby ;
+ 	document.getElementById("mem14").innerHTML = " " ;
+ 	
 }
 
  function getDistance(pos_A, pos_B){
