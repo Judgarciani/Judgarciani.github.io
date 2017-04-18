@@ -1,5 +1,5 @@
 
-Name: Best rent place in Chicago
+Name: Chicago for rent
 
 Keywords: Economy, ease, rent, closeness
 
