@@ -10,7 +10,7 @@ html, body  {
 
  .row.content {
 
- 	height: 500px
+ 	height: 510px
 
  }
  .row.content1 {
@@ -107,4 +107,9 @@ nav {
 
 a{
 color: #000000;
+}
+
+.convention {
+width: 40px; 
+height: 40px;  
 }

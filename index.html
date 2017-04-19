@@ -23,6 +23,7 @@
     <script src="JavaScript/Police.js"></script>
     <script src="JavaScript/ConnectLocations.js"></script>
     <script src="JavaScript/Libraries.js"></script>
+    <script src="JavaScript/Parks.js"></script>
     <script src="JavaScript/CommunityPrices.js"></script>
     <script src="JavaScript/weatherNoaa.js"></script>
     <!-- <script src="JavaScript/weatherNoaaXML.js"></script> -->
@@ -38,12 +39,14 @@
 
       <nav>
         <ul>
-          <li><a href="#" onclick="toogleRentMarkers()"> Toogle all rent places</a></li>
-          <li><a href="#" onclick="toogleCrimeMarkers()">Toogle all crimes</a></li>
-          <li><a href="#" onclick="tooglePoliceMarkers()">Toogle all police stations</a></li>
-          <li><a href="#" onclick="toogleLibraryMarkers()">Toogle all library locations</a></li> 
-          <li><a href="#" onclick="toogleConnectMarkers()">Toogle all connect locations</a></li> 
-          <li><a href="#" onclick="toggleHeatmap(map)"> Toogle Security Heat map</a></li>
+        <li>TOOGLE:</li>
+          <li><a href="#" onclick="toogleRentMarkers()"> Rent places</a></li>
+          <li><a href="#" onclick="toogleCrimeMarkers()">Crimes</a></li>
+          <li><a href="#" onclick="tooglePoliceMarkers()">Police stations</a></li>
+          <li><a href="#" onclick="toogleLibraryMarkers()">Library locations</a></li>
+          <li><a href="#" onclick="toogleParkMarkers()">Parks </a></li>  
+          <li><a href="#" onclick="toogleConnectMarkers()">Connect locations</a></li> 
+          <li><a href="#" onclick="toggleHeatmap(map)"> Security Heat map</a></li>
         </ul>
       </nav>
 
@@ -55,12 +58,13 @@
             <li id = "weather"></li>
             <li id = "weatherNoaa"></li>
             <li><b>Conventions</b> (click for more information)</li>
-            <li><a href="#" onclick="clickConvention(1)">University <IMG SRC="Images/universityIcon.png"></a></li>
-            <li><a href="#" onclick="clickConvention(2)">Rent place <IMG SRC="Images/rentIcon.png"></a> </li>
-            <li><a href="#" onclick="clickConvention(3)">Crimes <IMG SRC="Images/crimeIcon.png"></a></li>
-            <li><a href="#" onclick="clickConvention(4)">Police station <IMG SRC="Images/policeIcon.png"></a></li>
-            <li><a href="#" onclick="clickConvention(5)">Library <IMG SRC="Images/libraryIcon.png"></a></li>
-            <li><a href="#" onclick="clickConvention(6)">Connect location <IMG SRC="Images/connectIcon.png"></a> </li>
+            <li><a href="#" onclick="clickConvention(1)">University <IMG class = "convention" SRC="Images/universityIcon.png"></a></li>
+            <li><a href="#" onclick="clickConvention(2)">Rent place <IMG class = "convention"  SRC="Images/rentIcon.png"></a> </li>
+            <li><a href="#" onclick="clickConvention(3)">Crimes <IMG class = "convention" SRC="Images/crimeIcon.png"></a></li>
+            <li><a href="#" onclick="clickConvention(4)">Police station <IMG class = "convention" SRC="Images/policeIcon.png"></a></li>
+            <li><a href="#" onclick="clickConvention(5)">Library <IMG class = "convention" SRC="Images/libraryIcon.png"></a></li>
+            <li><a href="#" onclick="clickConvention(6)">Park <IMG class = "convention" SRC="Images/parkIcon.png"></a> </li>
+            <li><a href="#" onclick="clickConvention(7)">Connect location <IMG class = "convention" SRC="Images/connectIcon.png"></a> </li>
           </ul>
         </div>
         <div class = "col-sm-10  mapa" id="map">
@@ -87,6 +91,8 @@
          <li id = "12"></li>
          <li id = "13"></li>
          <li id = "14"></li>
+         <li id = "15"></li>
+         <li id = "16"></li>
        </ul>
      </div>
      <div class = "col-sm-4">
@@ -106,6 +112,8 @@
        <li id = "mem12"></li>
        <li id = "mem13"></li>
        <li id = "mem14"></li>
+       <li id = "mem15"></li>
+       <li id = "mem16"></li>
      </ul>
    </div>
    <div class = "col-sm-4">
@@ -148,6 +156,7 @@
    createPrices();
    changeRadius();
    toggleHeatmapOff();
+   getParks(map);
    getWeather(map);
    getRent(map);
    getCrimes(map);
@@ -169,6 +178,8 @@
  else if (type == 5)
   alertLibrary();
 else if (type == 6)
+  alertPark();
+else if (type == 7)
   alertConnect();
 
 }

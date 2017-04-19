@@ -9,6 +9,7 @@
  var policeStationsNearby;
  var connectNearby;
  var libraryNearby;
+ var parkNearby;
 
  function getRent(map){
  	$.ajax({
@@ -68,7 +69,7 @@
  		getDistance(pos_University,pos_B);
  		var distance = Rentdistance;
  		showNearby(data);
- 		showInfo(data,distance,crimesNearby,policeStationsNearby,connectNearby,libraryNearby);
+ 		showInfo(data,distance,crimesNearby,policeStationsNearby,connectNearby,libraryNearby,parkNearby);
  		
 
  		for (var i = rentMarkerVisited.length - 1; i >= 0; i--) {
@@ -96,6 +97,7 @@
  		this.policeStationsNearby=policeStationsNearby;
  		this.connectNearby=connectNearby;
  		this.libraryNearby=libraryNearby;
+ 		this.parkNearby=parkNearby;
  		visitRent.setAttribute("onclick"," getHistory(this)");
  		visitRent.innerHTML = "<h4 class=list-group-item-heading>" + rentMarkerVisited[rentMarkerVisited.length - 1].property_name +"</h4><p class=list-group-item-text>"+rentMarkerVisited[rentMarkerVisited.length - 1].address+"</p><p> Distance to the University :"+ Rentdistance+" meters</p>";
  		visitRent.marker = data;
@@ -105,7 +107,7 @@
  	});
  }
 
- function showInfo(data,distance,crimesNearby,policeStationsNearby,connectNearby,libraryNearby){
+ function showInfo(data,distance,crimesNearby,policeStationsNearby,connectNearby,libraryNearby,parkNearby){
 
  	document.getElementById("1").innerHTML = "<b>Comunity area name:</b> " + data.community_area ;
  	document.getElementById("2").innerHTML = "<b>Comunity area number:</b> " + data.community_area_number ;
@@ -115,12 +117,14 @@
  	document.getElementById("6").innerHTML = "<b>Zip code:</b> " + data.zip_code ;
  	document.getElementById("7").innerHTML = "<b>Phone number:</b> " + data.phone_number ;
  	document.getElementById("8").innerHTML = "<b>Management company:</b> " + data.management_company ;
- 	document.getElementById("9").innerHTML = "<b><em>Estimated price:</em></b>" + communityprice[data.community_area_number] + '&#36';
+ 	document.getElementById("9").innerHTML = "<b><em>Estimated price: </em></b>" + communityprice[data.community_area_number] + '&#36';
  	document.getElementById("10").innerHTML = "<b>Distance to the University:</b> " + distance + " meters";
  	document.getElementById("11").innerHTML = "<b>Crimes that happened nearby (last year):</b> " + crimesNearby ;
  	document.getElementById("12").innerHTML = "<b>Police station nearby:</b> " + policeStationsNearby ;
  	document.getElementById("13").innerHTML = "<b>Connect locations nearby:</b> " + connectNearby;
  	document.getElementById("14").innerHTML = "<b>Libraries nearby:</b> " + libraryNearby;
+ 	document.getElementById("15").innerHTML = "<b>Parks nearby:</b> " + parkNearby;
+ 	document.getElementById("16").innerHTML = "" ;
  	
 
 
@@ -148,11 +152,13 @@
  	document.getElementById("mem7").innerHTML = "<b>Phone number:</b> " + lastMarkerVisited.phone_number ;
  	document.getElementById("mem8").innerHTML = "<b>Management company:</b> "+ lastMarkerVisited.management_company ;
  	document.getElementById("mem9").innerHTML = "<b>Distance to the University:</b> " + Rentdistance + " meters";
- 	document.getElementById("mem10").innerHTML = "<b><em>Estimated price:</em></b>" + communityprice[lastMarkerVisited.community_area_number]+'&#36';
+ 	document.getElementById("mem10").innerHTML = "<b><em>Estimated price: </em></b>" + communityprice[lastMarkerVisited.community_area_number]+'&#36';
  	document.getElementById("mem11").innerHTML = "<b>Crimes that happened nearby (last year):</b> " + lastMarkerVisited.crimesNearby ;
  	document.getElementById("mem12").innerHTML = "<b>Police station nearby:</b> " + lastMarkerVisited.policeStationsNearby ;
  	document.getElementById("mem13").innerHTML = "<b>Connect locations nearby:</b> " + lastMarkerVisited.connectNearby;
  	document.getElementById("mem14").innerHTML = "<b>Libraries nearby:</b> " + lastMarkerVisited.libraryNearby;
+ 	document.getElementById("mem15").innerHTML = "<b>Parks nearby:</b> " + lastMarkerVisited.parkNearby;
+ 	document.getElementById("mem16").innerHTML = "" ;
 
  }
 
@@ -173,12 +179,14 @@
  	document.getElementById("mem6").innerHTML = "<b>Zip code:</b> " + info.marker.zip_code ;
  	document.getElementById("mem7").innerHTML = "<b>Phone number:</b> " + info.marker.phone_number ;
  	document.getElementById("mem8").innerHTML = "<b>Management company:</b> " + info.marker.management_company ;
- 	document.getElementById("mem9").innerHTML = "<b><em>Estimated price:</em></b>" + communityprice[info.marker.community_area_number]+'&#36';
+ 	document.getElementById("mem9").innerHTML = "<b><em>Estimated price: </em></b>" + communityprice[info.marker.community_area_number]+'&#36';
  	document.getElementById("mem10").innerHTML = "<b>Crimes that happened nearby (last year):</b> " + info.marker.crimesNearby ;
  	document.getElementById("mem11").innerHTML = "<b>Police station nearby:</b> " + info.marker.policeStationsNearby ;
  	document.getElementById("mem12").innerHTML = "<b>Connect locations nearby:</b> " + info.marker.connectNearby;
  	document.getElementById("mem13").innerHTML = "<b>Libraries nearby:</b>" + info.marker.libraryNearby ;
- 	document.getElementById("mem14").innerHTML = " " ;
+ 	document.getElementById("mem14").innerHTML = "<b>Parks nearby:</b> " + info.marker.parkNearby ;
+ 	document.getElementById("mem15").innerHTML = " " ;
+ 	document.getElementById("mem16").innerHTML = " " ;
  	
 }
 
@@ -195,11 +203,10 @@
  	policeStationsNearby = 0;
  	connectNearby = 0;
  	libraryNearby = 0;
+ 	parkNearby = 0;
  	for (var i = 0; i < markers.length; i++) {
 
- 		
-
- 		if(markers[i].type == "library")
+ 		if(markers[i].type == "library" || markers[i].type == "park")
 			pos_B = new google.maps.LatLng(markers[i].data.location.coordinates[1],markers[i].data.location.coordinates[0]);
 		else
 			pos_B = new google.maps.LatLng(markers[i].data.latitude,markers[i].data.longitude);
@@ -231,6 +238,11 @@
  				if(!markers[i].getVisible()) 
  					markers[i].setVisible(true);
  				libraryNearby++;
+ 			}else if(markers[i].type == "park"){
+
+ 				if(!markers[i].getVisible()) 
+ 					markers[i].setVisible(true);
+ 				parkNearby++;
  			}
  		} 
  		else 
@@ -240,6 +252,7 @@
  		markers[i].policeStationsNearby = policeStationsNearby;
  		markers[i].connectNearby = connectNearby;
  		markers[i].libraryNearby = libraryNearby;
+ 		markers[i].parkNearby = parkNearby;
 
 
  	}
