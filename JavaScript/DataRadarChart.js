@@ -1,7 +1,7 @@
 var w = 350,
 h = 350;
 
-var colorscale = d3.scale.category10();
+var colorscale = d3.scaleOrdinal(d3.schemeCategory10);
 
 //Legend titles
 var LegendOptions = ['Close places'];
