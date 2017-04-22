@@ -10,6 +10,8 @@
  var connectNearby;
  var libraryNearby;
  var parkNearby;
+ var rentNumber;
+ var score;
 
  function getRent(map){
  	$.ajax({
@@ -69,8 +71,8 @@
  		getDistance(pos_University,pos_B);
  		var distance = Rentdistance;
  		showNearby(data);
- 		showInfo(data,distance,crimesNearby,policeStationsNearby,connectNearby,libraryNearby,parkNearby);
- 		
+ 		showInfo(data,distance,score);
+ 		radarDraw(rentNumber); 
 
  		for (var i = rentMarkerVisited.length - 1; i >= 0; i--) {
  			if (rentMarkerVisited[i] == data){
@@ -88,7 +90,9 @@
  		rentMarkerVisited[rentMarkerVisited.length -1].policeStationsNearby = policeStationsNearby;
  		rentMarkerVisited[rentMarkerVisited.length -1].connectNearby = connectNearby;
  		rentMarkerVisited[rentMarkerVisited.length -1].libraryNearby = libraryNearby;
- 		rentVisited();	
+ 		rentMarkerVisited[rentMarkerVisited.length -1].parkNearby = parkNearby;
+ 		rentMarkerVisited[rentMarkerVisited.length -1].score = score;
+ 		rentVisited();
  		pos_B = new google.maps.LatLng(rentMarkerVisited[rentMarkerVisited.length - 1].latitude,rentMarkerVisited[rentMarkerVisited.length - 1].longitude);
  		getDistance(pos_University,pos_B);
  		var visitRent = document.createElement("a");
@@ -98,8 +102,9 @@
  		this.connectNearby=connectNearby;
  		this.libraryNearby=libraryNearby;
  		this.parkNearby=parkNearby;
+ 		this.score=score;
  		visitRent.setAttribute("onclick"," getHistory(this)");
- 		visitRent.innerHTML = "<h4 class=list-group-item-heading>" + rentMarkerVisited[rentMarkerVisited.length - 1].property_name +"</h4><p class=list-group-item-text>"+rentMarkerVisited[rentMarkerVisited.length - 1].address+"</p><p> Distance to the University :"+ Rentdistance+" meters</p>";
+ 		visitRent.innerHTML = "<h4 class=list-group-item-heading>" + rentMarkerVisited[rentMarkerVisited.length - 1].property_name +"</h4><p class=list-group-item-text>"+rentMarkerVisited[rentMarkerVisited.length - 1].address+"</p><p> Distance to the University :"+ Rentdistance+" meters &nbsp &nbsp &nbsp Rent Rating :"+ score+"</p>";
  		visitRent.marker = data;
 
  		if (!repeat)
@@ -107,7 +112,7 @@
  	});
  }
 
- function showInfo(data,distance,crimesNearby,policeStationsNearby,connectNearby,libraryNearby,parkNearby){
+ function showInfo(data,distance,score){
 
  	document.getElementById("1").innerHTML = "<b>Comunity area name:</b> " + data.community_area ;
  	document.getElementById("2").innerHTML = "<b>Comunity area number:</b> " + data.community_area_number ;
@@ -117,17 +122,10 @@
  	document.getElementById("6").innerHTML = "<b>Zip code:</b> " + data.zip_code ;
  	document.getElementById("7").innerHTML = "<b>Phone number:</b> " + data.phone_number ;
  	document.getElementById("8").innerHTML = "<b>Management company:</b> " + data.management_company ;
- 	document.getElementById("9").innerHTML = "<b><em>Estimated price: </em></b>" + communityprice[data.community_area_number] + '&#36';
- 	document.getElementById("10").innerHTML = "<b>Distance to the University:</b> " + distance + " meters";
- 	document.getElementById("11").innerHTML = "<b>Crimes that happened nearby (last year):</b> " + crimesNearby ;
- 	document.getElementById("12").innerHTML = "<b>Police station nearby:</b> " + policeStationsNearby ;
- 	document.getElementById("13").innerHTML = "<b>Connect locations nearby:</b> " + connectNearby;
- 	document.getElementById("14").innerHTML = "<b>Libraries nearby:</b> " + libraryNearby;
- 	document.getElementById("15").innerHTML = "<b>Parks nearby:</b> " + parkNearby;
- 	document.getElementById("16").innerHTML = "" ;
- 	
-
-
+ 	document.getElementById("9").innerHTML = "<b>Distance to the University:</b> " + distance + " meters";
+ 	document.getElementById("10").innerHTML = "<b><em>Estimated price: </em></b>" + communityprice[data.community_area_number] + '&#36';	
+  	document.getElementById("11").innerHTML = "<h4>Rent rating: " + score + "</h4>";
+ 	document.getElementById("12").innerHTML = "<b>Number of closest places: </b>";
 
  }
 
@@ -142,7 +140,14 @@
  	pos_University = new google.maps.LatLng(41.8708,-87.6505);
  	pos_B = new google.maps.LatLng(lastMarkerVisited.latitude,lastMarkerVisited.longitude);
  	getDistance(pos_University,pos_B);
+ 	for (var k = 0 ; k <= rentMarker.length - 1; k++) {
+ 		if (rentMarker[k].latitude == lastMarkerVisited.latitude && rentMarker[k].longitude == lastMarkerVisited.longitude){
+ 			rentNumber = k;
+ 			break;
+ 		}		
+ 	}
 
+ 	radarDrawHistory(lastMarkerVisited); 
  	document.getElementById("mem1").innerHTML = "<b>Comunity area name:</b> " + lastMarkerVisited.community_area ;
  	document.getElementById("mem2").innerHTML = "<b>Comunity area number:</b> " + lastMarkerVisited.community_area_number ;
  	document.getElementById("mem3").innerHTML = "<b>Property type:</b> " + lastMarkerVisited.property_type ;
@@ -153,24 +158,26 @@
  	document.getElementById("mem8").innerHTML = "<b>Management company:</b> "+ lastMarkerVisited.management_company ;
  	document.getElementById("mem9").innerHTML = "<b>Distance to the University:</b> " + Rentdistance + " meters";
  	document.getElementById("mem10").innerHTML = "<b><em>Estimated price: </em></b>" + communityprice[lastMarkerVisited.community_area_number]+'&#36';
- 	document.getElementById("mem11").innerHTML = "<b>Crimes that happened nearby (last year):</b> " + lastMarkerVisited.crimesNearby ;
- 	document.getElementById("mem12").innerHTML = "<b>Police station nearby:</b> " + lastMarkerVisited.policeStationsNearby ;
- 	document.getElementById("mem13").innerHTML = "<b>Connect locations nearby:</b> " + lastMarkerVisited.connectNearby;
- 	document.getElementById("mem14").innerHTML = "<b>Libraries nearby:</b> " + lastMarkerVisited.libraryNearby;
- 	document.getElementById("mem15").innerHTML = "<b>Parks nearby:</b> " + lastMarkerVisited.parkNearby;
- 	document.getElementById("mem16").innerHTML = "" ;
-
+ 	document.getElementById("mem11").innerHTML = "<h4>Rent rating: "+ lastMarkerVisited.score + "</h4>";
+ 	document.getElementById("mem12").innerHTML = "<b>Number of closest places: </b>";
  }
 
 
  function getHistory(info){
-
+ 	rentNumber=0;
  	info.setAttribute("class","list-group-item active");
  	if(selected != undefined){
  		selected.setAttribute("class","list-group-item");
  	}
  	selected = info;
-
+ 	var rentNumberHist=0;
+ 	for (var j = 0 ; j <= rentMarker.length - 1; j++) {
+ 		if (rentMarker[j].latitude == info.marker.latitude && rentMarker[j].longitude == info.marker.longitude){
+ 			rentNumberHist = j;
+ 			break;
+ 		}		
+ 	}
+ 	radarDrawHistory(info.marker); 
  	document.getElementById("mem1").innerHTML = "<b>Comunity area name:</b> " + info.marker.community_area ;
  	document.getElementById("mem2").innerHTML = "<b>Comunity area number:</b> " + info.marker.community_area_number ;
  	document.getElementById("mem3").innerHTML = "<b>Property type:</b> " + info.marker.property_type ;
@@ -180,15 +187,12 @@
  	document.getElementById("mem7").innerHTML = "<b>Phone number:</b> " + info.marker.phone_number ;
  	document.getElementById("mem8").innerHTML = "<b>Management company:</b> " + info.marker.management_company ;
  	document.getElementById("mem9").innerHTML = "<b><em>Estimated price: </em></b>" + communityprice[info.marker.community_area_number]+'&#36';
- 	document.getElementById("mem10").innerHTML = "<b>Crimes that happened nearby (last year):</b> " + info.marker.crimesNearby ;
- 	document.getElementById("mem11").innerHTML = "<b>Police station nearby:</b> " + info.marker.policeStationsNearby ;
- 	document.getElementById("mem12").innerHTML = "<b>Connect locations nearby:</b> " + info.marker.connectNearby;
- 	document.getElementById("mem13").innerHTML = "<b>Libraries nearby:</b>" + info.marker.libraryNearby ;
- 	document.getElementById("mem14").innerHTML = "<b>Parks nearby:</b> " + info.marker.parkNearby ;
- 	document.getElementById("mem15").innerHTML = " " ;
- 	document.getElementById("mem16").innerHTML = " " ;
- 	
-}
+  	document.getElementById("mem10").innerHTML = "<br>";	
+ 	document.getElementById("mem11").innerHTML = "<h4>Rent rating: " + info.marker.score + "</h4>";
+ 	document.getElementById("mem12").innerHTML = "<b>Number of closest places:</b>";
+
+
+ }
 
  function getDistance(pos_A, pos_B){
 
@@ -204,12 +208,20 @@
  	connectNearby = 0;
  	libraryNearby = 0;
  	parkNearby = 0;
+ 	rentNumber = 0;
+ 	score = 0;
+ 	for (var j = 0 ; j <= rentMarker.length - 1; j++) {
+ 		if (rentMarker[j].latitude == data.latitude && rentMarker[j].longitude == data.longitude){
+ 			rentNumber = j;
+ 			break;
+ 		}		
+ 	}
  	for (var i = 0; i < markers.length; i++) {
 
  		if(markers[i].type == "library" || markers[i].type == "park")
-			pos_B = new google.maps.LatLng(markers[i].data.location.coordinates[1],markers[i].data.location.coordinates[0]);
-		else
-			pos_B = new google.maps.LatLng(markers[i].data.latitude,markers[i].data.longitude);
+ 			pos_B = new google.maps.LatLng(markers[i].data.location.coordinates[1],markers[i].data.location.coordinates[0]);
+ 		else
+ 			pos_B = new google.maps.LatLng(markers[i].data.latitude,markers[i].data.longitude);
 
 
  		getDistance(pos_A,pos_B);
@@ -221,7 +233,6 @@
 
  				if(!markers[i].getVisible()) 
  					markers[i].setVisible(true);
-
  				crimesNearby++;
  			}else if(markers[i].type == "police"){
 
@@ -248,17 +259,17 @@
  		else 
  			markers[i].setVisible(false);
 
- 		markers[i].crimesNearby = crimesNearby;
- 		markers[i].policeStationsNearby = policeStationsNearby;
- 		markers[i].connectNearby = connectNearby;
- 		markers[i].libraryNearby = libraryNearby;
- 		markers[i].parkNearby = parkNearby;
-
-
+ 		rentMarker[rentNumber].crimesNearby = crimesNearby;
+ 		rentMarker[rentNumber].policeStationsNearby = policeStationsNearby;
+ 		rentMarker[rentNumber].connectNearby = connectNearby;
+ 		rentMarker[rentNumber].libraryNearby = libraryNearby;
+ 		rentMarker[rentNumber].parkNearby = parkNearby;
+ 		score = (-2*crimesNearby) + (2*policeStationsNearby) + connectNearby + libraryNearby + parkNearby;
+ 		rentMarker[rentNumber].score = score;
  	}
 
  }
 
  function alertRent(){
-	alert( "Showing " + rentMarker.length + " rent places! \nClicking on a rent marker will show all markers within a 500 meter radius"  );
+ 	alert( "Showing " + rentMarker.length + " rent places! \nClicking on a rent marker will show all markers within a 500 meter radius"  );
  }

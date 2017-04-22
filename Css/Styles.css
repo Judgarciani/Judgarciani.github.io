@@ -25,7 +25,7 @@ html, body  {
 
   .scrollList {
     overflow-y: scroll;
-    height: 280px;
+    height: 650px;
     width: 1005;
   }
 
@@ -113,3 +113,15 @@ color: #000000;
 width: 40px; 
 height: 40px;  
 }
+
+#chart {
+      top: 50px;
+      left: 50px;
+      background: #DEC786;
+    } 
+
+#chartHistory {
+      top: 50px;
+      left: 50px;
+      background: #DEC786;
+    } 

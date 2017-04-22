@@ -41,7 +41,7 @@ Map View:
 
 Data Visualization:
 
-[Y/N] [describe] Use Graph? What is the type? (bar chart, pie chart, radar chart ...) I use a heat map
+[Y/N] [describe] Use Graph? What is the type? (bar chart, pie chart, radar chart ...) I use a heat map, amd a radar chart
 [Y/N] [List] Any interaction available on the graph? List them (enable click on numbers, drag on lines, change time/variables ...)  toogle the heatmap on/off
 
 Interaction Form:
@@ -51,7 +51,7 @@ Interaction Form:
 *Buttons for show and hide crime, rent, etc. places.
 [Y/N] [List] Any information input? List them. (comments, markers, user preference ...) History of the rent places visited.
 [Y/N] [List] Interaction with Map? List them. (filter on price will affect map markers, sort on price will affect map markers, ...) Clicking a rent icon will show all markers within a 500 meter radius. 
-[Y/N] [List] Interaction with data visualization? List them. (filter, sort, set variables ...) NO
+[Y/N] [List] Interaction with data visualization? List them. (filter, sort, set variables ...) Display the Radarchart
 
 
 Test Case Which browsers did you test your project on?

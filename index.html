@@ -15,7 +15,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+
     <script src="JavaScript/Rent.js"></script>
     <script src="JavaScript/Crimes.js"></script>
     <script src="JavaScript/CrimesHeatMap.js"></script>
@@ -26,6 +27,8 @@
     <script src="JavaScript/Parks.js"></script>
     <script src="JavaScript/CommunityPrices.js"></script>
     <script src="JavaScript/weatherNoaa.js"></script>
+    <script src="JavaScript/RadarChart.js"></script>
+    <script src="JavaScript/DataRadarChart.js"></script>
     <!-- <script src="JavaScript/weatherNoaaXML.js"></script> -->
     <link rel="stylesheet" type="text/css" href="Css/Styles.css" media="screen" />
   </head>
@@ -39,7 +42,7 @@
 
       <nav>
         <ul>
-        <li>TOOGLE:</li>
+          <li>TOOGLE:</li>
           <li><a href="#" onclick="toogleRentMarkers()"> Rent places</a></li>
           <li><a href="#" onclick="toogleCrimeMarkers()">Crimes</a></li>
           <li><a href="#" onclick="tooglePoliceMarkers()">Police stations</a></li>
@@ -58,6 +61,7 @@
             <li id = "weather"></li>
             <li id = "weatherNoaa"></li>
             <li><b>Conventions</b> (click for more information)</li>
+            <li><a href="#" onclick="clickConvention(0)">TUTORIAL</a></li>
             <li><a href="#" onclick="clickConvention(1)">University <IMG class = "convention" SRC="Images/universityIcon.png"></a></li>
             <li><a href="#" onclick="clickConvention(2)">Rent place <IMG class = "convention"  SRC="Images/rentIcon.png"></a> </li>
             <li><a href="#" onclick="clickConvention(3)">Crimes <IMG class = "convention" SRC="Images/crimeIcon.png"></a></li>
@@ -89,10 +93,7 @@
          <li id = "10"></li>
          <li id = "11"></li>
          <li id = "12"></li>
-         <li id = "13"></li>
-         <li id = "14"></li>
-         <li id = "15"></li>
-         <li id = "16"></li>
+         <li id = "chart"></li>
        </ul>
      </div>
      <div class = "col-sm-4">
@@ -110,17 +111,12 @@
        <li id = "mem10"></li>
        <li id = "mem11"></li>
        <li id = "mem12"></li>
-       <li id = "mem13"></li>
-       <li id = "mem14"></li>
-       <li id = "mem15"></li>
-       <li id = "mem16"></li>
+       <li id = "chartHistory"></li>
      </ul>
    </div>
    <div class = "col-sm-4">
     <h4> History</h4>
-    <div class="list-group-striped scrollList" id = "history">
-
-    </div>
+    <div class="list-group-striped scrollList" id = "history"></div>
   </div>
 </div>
 </div>
@@ -163,17 +159,18 @@
    getStations(map);
    getConnect(map);
    getLibraries(map);
-
  }
 
  function clickConvention(type){
-  if (type == 1)
+  if(type ==0)
+    alertTutorial();
+  else if (type == 1)
     map.setCenter({lat: 41.8708, lng: -87.6505});
   else if (type == 2)
     alertRent();
   else if (type == 3)
-  alertCrime();
- else if (type == 4)
+    alertCrime();
+  else if (type == 4)
    alertPolice();
  else if (type == 5)
   alertLibrary();
@@ -181,8 +178,12 @@ else if (type == 6)
   alertPark();
 else if (type == 7)
   alertConnect();
-
 }
+
+
+ function alertTutorial(){
+  alert( "Tutorial:  \nThis app wants to help a new student to find an affordable rent place near Illinois University. \nGuide: \n*Clicking a marker in the map, will display all the information(it depends on the marker) available.  \n*Clicking on a convention tab will show information depending on the tab clicked. \n*The history scrollbar updates automatically.\n*At the top of the page there are buttons that toogle (ON/OFF) the display of the markers in the map. \nExtra:\nThe score item is calculated by summing the number of connection places nearby, the number of libraries nearby, the number of parks nearby, the number of police stations multiplied by 2 and substracting the number of crimes that happened nearby in the last year multiplied by 2.");
+ }
 </script>
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJqxRfLj0aU8MeHKTuXQI8_-r01CE_Oq8&callback=initMap&libraries=visualization,geometry">

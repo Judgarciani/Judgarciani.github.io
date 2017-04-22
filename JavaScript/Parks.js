@@ -10,7 +10,6 @@ $.ajax({
       "$$app_token" : "0JZQkOpCfiZ221meZTVm0tMag"
     }
 }).done(function(data) {
-    console.log(data[0]);  
     for (var i = 0; i <= data.length; i++) {
       
       if(data[i]){
