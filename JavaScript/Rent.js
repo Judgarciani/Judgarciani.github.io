@@ -104,7 +104,8 @@
  		this.parkNearby=parkNearby;
  		this.score=score;
  		visitRent.setAttribute("onclick"," getHistory(this)");
- 		visitRent.innerHTML = "<h4 class=list-group-item-heading>" + rentMarkerVisited[rentMarkerVisited.length - 1].property_name +"</h4><p class=list-group-item-text>"+rentMarkerVisited[rentMarkerVisited.length - 1].address+"</p><p> Distance to the University :"+ Rentdistance+" meters &nbsp &nbsp &nbsp Rent Rating :"+ score+"</p>";
+ 		visitRent.innerHTML = "<h4 class=list-group-item-heading>" + rentMarkerVisited[rentMarkerVisited.length - 1].property_name +"</h4><p class=list-group-item-text>"+rentMarkerVisited[rentMarkerVisited.length - 1].address+
+ 		"</p><p> Distance to the University :"+ Rentdistance+" meters &nbsp &nbsp &nbsp Rent Rating :"+ score+"</p>";
  		visitRent.marker = data;
 
  		if (!repeat)

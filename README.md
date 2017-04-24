@@ -18,7 +18,7 @@ Description of the datasets and function design
 *[Police Stations] [https://data.cityofchicago.org/Public-Safety/Police-Stations/9rg7-mz9y] [] [district,district_name,,address,zip,website,phone,fax,location] [1000]
 
 
-[Y/N] Do you use the primary dataset ”online climate data” from data.gov?  NOT YET
+[Y/N] Do you use the primary dataset ”online climate data” from data.gov?  YES
 
 [Y/N] [List] Are all these datasets from data.gov or data.indy.gov? If not, where are they coming from (links)?
 *The data sets that i use are from https://data.cityofchicago.org/
@@ -57,7 +57,7 @@ Interaction Form:
 Test Case Which browsers did you test your project on?
 Tested in Chrome, Edge and Firefox
 
-I use the open weather API (i know it isnt what we must use), but i dont know why in the GitHub page it doesnt work 
+I also use the open weather API (i know it isnt what we must use), but it doesnt work in the github page.
 
 Link : https://judgarciani.github.io/
 

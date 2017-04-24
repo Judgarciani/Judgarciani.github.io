@@ -29,7 +29,6 @@
     <script src="JavaScript/weatherNoaa.js"></script>
     <script src="JavaScript/RadarChart.js"></script>
     <script src="JavaScript/DataRadarChart.js"></script>
-    <!-- <script src="JavaScript/weatherNoaaXML.js"></script> -->
     <link rel="stylesheet" type="text/css" href="Css/Styles.css" media="screen" />
   </head>
   <body>
@@ -59,9 +58,9 @@
         <div class="col-sm-2 sidenav">
           <ul class="nav nav-pills nav-stacked">
             <li id = "weather"></li>
-            <li id = "weatherNoaa"></li>
             <li><b>Conventions</b> (click for more information)</li>
             <li><a href="#" onclick="clickConvention(0)">TUTORIAL</a></li>
+            <li><a href="#" onclick="clickConvention(8)"> <b> April weather</b></a> </li>
             <li><a href="#" onclick="clickConvention(1)">University <IMG class = "convention" SRC="Images/universityIcon.png"></a></li>
             <li><a href="#" onclick="clickConvention(2)">Rent place <IMG class = "convention"  SRC="Images/rentIcon.png"></a> </li>
             <li><a href="#" onclick="clickConvention(3)">Crimes <IMG class = "convention" SRC="Images/crimeIcon.png"></a></li>
@@ -178,6 +177,8 @@ else if (type == 6)
   alertPark();
 else if (type == 7)
   alertConnect();
+else if (type == 8)
+  alertWeather();
 }
 
 
