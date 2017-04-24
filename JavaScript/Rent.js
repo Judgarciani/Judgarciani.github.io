@@ -115,13 +115,20 @@
  		this.parkNearby=parkNearby;
  		this.score=score;
  		visitRent.setAttribute("onclick"," getHistory(this)");
- 		visitRent.innerHTML = "<h4 class=list-group-item-heading>" + rentMarkerVisited[rentMarkerVisited.length - 1].property_name +"</h4><p class=list-group-item-text>"+rentMarkerVisited[rentMarkerVisited.length - 1].address+
- 		"</p><p> Distance to the University :"+ Rentdistance+" meters &nbsp &nbsp &nbsp Rent Rating :"+ score+"</p>";
- 		visitRent.marker = data;
+ 		if(communityprice[data.community_area_number] == 600){
+ 			 visitRent.innerHTML = "<h4 class=list-group-item-heading>" + rentMarkerVisited[rentMarkerVisited.length - 1].property_name +" &nbsp &nbsp*Cheapest Rent Place"+"</h4><p class=list-group-item-text>"+rentMarkerVisited[rentMarkerVisited.length - 1].address+
+ 			"</p><p> Distance to the University :"+ Rentdistance+" meters &nbsp &nbsp &nbsp Rent Rating :"+ score+"</p>";
 
- 		if (!repeat)
- 			$("#history").append(visitRent);	  
- 	});
+ 		}else{ 		
+ 			visitRent.innerHTML = "<h4 class=list-group-item-heading>" + rentMarkerVisited[rentMarkerVisited.length - 1].property_name +"</h4><p class=list-group-item-text>"+rentMarkerVisited[rentMarkerVisited.length - 1].address+
+ 			"</p><p> Distance to the University :"+ Rentdistance+" meters &nbsp &nbsp &nbsp Rent Rating :"+ score+"</p>";
+ 		}
+
+ 			visitRent.marker = data;
+
+ 			if (!repeat)
+ 				$("#history").append(visitRent);	  
+ 		});
  }
 
  function showInfo(data,distance,score){
@@ -287,9 +294,9 @@
  }
 
  function centerCheapPlace(cheapestRentNumber){
- 	 var latC = rentMarker[cheapestRentNumber].latitude;
- 	 var lonC = rentMarker[cheapestRentNumber].longitude;
- 	 console.log("Cheapest location: latitude: " +latC+ " longitude: "+lonC);
+ 	var latC = rentMarker[cheapestRentNumber].latitude;
+ 	var lonC = rentMarker[cheapestRentNumber].longitude;
+ 	console.log("Cheapest location: latitude: " +latC+ " longitude: "+lonC);
  	map.setCenter(new google.maps.LatLng(latC, lonC));
 
 
