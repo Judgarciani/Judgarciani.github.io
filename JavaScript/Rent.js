@@ -12,6 +12,8 @@
  var parkNearby;
  var rentNumber;
  var score;
+ var cheapestRentNumber;
+ var cheapestRent;
 
  function getRent(map){
  	$.ajax({
@@ -22,7 +24,7 @@
  			"$$app_token" : "0JZQkOpCfiZ221meZTVm0tMag"
  		}
  	}).done(function(data) {
-
+ 		cheapestRent = 2000;
  		for (var i = 0; i <= data.length; i++) {
  			if (data[i]){
  				var marker = new google.maps.Marker({
@@ -31,11 +33,20 @@
  					title: data[i].address,
  					icon: "Images/rentIcon.png"
  				});
- 				rentMarker.push(marker);
+ 				rentMarker[i]= marker;
+ 				if(data[i].latitude){
+ 					rentMarker[i].latitude= data[i].latitude;
+ 					rentMarker[i].longitude= data[i].longitude;
+ 					if(i!=0 && communityprice[data[i].community_area_number] < cheapestRent){
+ 						cheapestRent = communityprice[data[i].community_area_number];
+ 						cheapestRentNumber = i;
+ 					}
+ 				}
  				createInfoRent(marker,data[i]);
  			}
 
- 		};          
+ 		}; 
+
  	});
  }
 
@@ -125,7 +136,7 @@
  	document.getElementById("8").innerHTML = "<b>Management company:</b> " + data.management_company ;
  	document.getElementById("9").innerHTML = "<b>Distance to the University:</b> " + distance + " meters";
  	document.getElementById("10").innerHTML = "<b><em>Estimated price: </em></b>" + communityprice[data.community_area_number] + '&#36';	
-  	document.getElementById("11").innerHTML = "<h4>Rent rating: " + score + "</h4>";
+ 	document.getElementById("11").innerHTML = "<h4>Rent rating: " + score + "</h4>";
  	document.getElementById("12").innerHTML = "<b>Number of closest places: </b>";
 
  }
@@ -188,7 +199,7 @@
  	document.getElementById("mem7").innerHTML = "<b>Phone number:</b> " + info.marker.phone_number ;
  	document.getElementById("mem8").innerHTML = "<b>Management company:</b> " + info.marker.management_company ;
  	document.getElementById("mem9").innerHTML = "<b><em>Estimated price: </em></b>" + communityprice[info.marker.community_area_number]+'&#36';
-  	document.getElementById("mem10").innerHTML = "<br>";	
+ 	document.getElementById("mem10").innerHTML = "<br>";	
  	document.getElementById("mem11").innerHTML = "<h4>Rent rating: " + info.marker.score + "</h4>";
  	document.getElementById("mem12").innerHTML = "<b>Number of closest places:</b>";
 
@@ -273,4 +284,13 @@
 
  function alertRent(){
  	alert( "Showing " + rentMarker.length + " rent places! \nClicking on a rent marker will show all markers within a 500 meter radius"  );
+ }
+
+ function centerCheapPlace(cheapestRentNumber){
+ 	 var latC = rentMarker[cheapestRentNumber].latitude;
+ 	 var lonC = rentMarker[cheapestRentNumber].longitude;
+ 	 console.log("Cheapest location: latitude: " +latC+ " longitude: "+lonC);
+ 	map.setCenter(new google.maps.LatLng(latC, lonC));
+
+
  }
