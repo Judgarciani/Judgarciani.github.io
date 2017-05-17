@@ -59,9 +59,7 @@ function createInfoLibrary(libmarker, data) {
 	  document.getElementById("9").innerHTML = " " ;
     document.getElementById("10").innerHTML = " " ;
     document.getElementById("11").innerHTML = " " ;
-    document.getElementById("12").innerHTML = " " ; 
-    document.getElementById("13").innerHTML = " " ;
-    document.getElementById("14").innerHTML = " " ;   	
+    document.getElementById("12").innerHTML = " " ; 	
 });
 }
 
